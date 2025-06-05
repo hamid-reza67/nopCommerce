@@ -20,6 +20,6 @@ public class PluginNopStartup : INopStartup
     {
         // اضافه کردن DbContext برای دیتابیس خارجی
         services.AddDbContext<OldStoreDbContext>(options =>
-            options.UseSqlServer("Server=localhost;Database=EtminanshopStore;Trusted_Connection=True;TrustServerCertificate=True;"));
+            options.UseSqlServer("Data Source=5.182.44.159,1433;Initial Catalog=Etminanshop;Integrated Security=False;Persist Security Info=False;User ID=sa;Password=!!Etmin@nShop#!@12548012986;Trust Server Certificate=True"));
     }
 }
