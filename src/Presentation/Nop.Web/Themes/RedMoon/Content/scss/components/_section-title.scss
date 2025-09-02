@@ -1,0 +1,40 @@
+.section-title {
+  position: relative;
+  margin-bottom: 12px;
+  @include media-breakpoint-down(md) {
+    margin-bottom: 24px;
+  }
+  .titles {
+    @include media-breakpoint-down(md) {
+      text-align: center !important;
+    }
+    .subtitle {
+      color: #3a3a54;
+      @include fontSize(16, 600, 24);
+      margin-bottom: 12px;
+      display: inline-block;
+      position: relative;
+
+      @include media-breakpoint-down(md) {
+        @include fontSize(14, 600, 22);
+        margin-bottom: 1px;
+      }
+    }
+    .title {
+      @include fontSize(14, 600, 14);
+      color: #000;
+      margin-bottom: 0;
+      @include media-breakpoint-down(md) {
+        text-align: center !important;
+        @include fontSize(19, 300, 38);
+      }
+    }
+    .bottom-title {
+      margin-bottom: 0;
+      @include fontSize(20, 300, 35);
+      color: $soft-peach-450;
+    }
+  }
+}
+
+

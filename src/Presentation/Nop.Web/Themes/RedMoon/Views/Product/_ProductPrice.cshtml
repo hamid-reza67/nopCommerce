@@ -1,0 +1,78 @@
+﻿@model ProductPriceModel
+
+@using Nop.Core
+@using Nop.Core.Domain.Tax
+
+@inject IWorkContext workContext
+
+@if (!Model.CustomerEntersPrice)
+{
+    <div class="prices">
+        @if (Model.CallForPrice)
+        {
+            @*call for price*@
+            <div class="product-price call-for-price">
+                <span>@T("Products.CallForPrice")</span>
+            </div>
+        }
+        else
+        {
+            if (Model.IsRental)
+            {
+                <div class="rental-price">
+                    <span>@T("Products.Price.RentalPrice"):</span>
+                    <span>@Model.RentalPrice</span>
+                </div>
+            }
+
+            <div class="main-price">
+                <div class="title">مبلغ قابل پرداخت</div>
+                <div class="price">
+                    @Html.Raw(Model.Price)
+                    <img src="assets/svg/toman.svg" alt="">
+                </div>
+            </div>
+
+
+            if (!string.IsNullOrWhiteSpace(Model.OldPrice))
+            {
+                @*old price*@
+                <div class="discount-price">
+                    <div class="badge">قیمت همکاری</div>
+                    <div class="offer">
+                        <div class="price">@Model.OldPrice</div>
+                        <div class="offer-badge">30%</div>
+                    </div>
+                </div>
+            }
+            if (!string.IsNullOrWhiteSpace(Model.PriceWithDiscount))
+            {
+                @*discounted price*@
+                <div class="main-price">
+                    <div class="title">مبلغ قابل پرداخت</div>
+                    <div class="price">
+                        <span class="price-value-@(Model.ProductId)">
+                            @Html.Raw(Model.PriceWithDiscount)
+                        </span>
+                        <img src="assets/svg/toman.svg" alt="">
+                    </div>
+                </div>
+            }
+            if (!string.IsNullOrEmpty(Model.BasePricePAngV))
+            {
+                <div class="base-price-pangv" id="base-price-pangv-@Model.ProductId">
+                    @Model.BasePricePAngV
+                </div>
+            }
+            if (Model.DisplayTaxShippingInfo)
+            {
+                var inclTax = await workContext.GetTaxDisplayTypeAsync() == TaxDisplayType.IncludingTax;
+                //tax info is already included in the price (incl/excl tax). that's why we display only shipping info here
+                //of course, you can modify appropriate locales to include VAT info there
+                <div class="tax-shipping-info">
+                    @T(inclTax ? "Products.Price.TaxShipping.InclTax" : "Products.Price.TaxShipping.ExclTax", Url.RouteTopicUrl("shippinginfo"))
+                </div>
+            }
+        }
+    </div>
+}

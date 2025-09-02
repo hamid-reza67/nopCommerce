@@ -1,0 +1,49 @@
+﻿@model ProductReviewHelpfulnessModel
+
+
+<button id="vote-yes-@(Model.ProductReviewId)" class="like" type="button">
+    <span id="helpfulness-vote-yes-@(Model.ProductReviewId)" class="text">@(Model.HelpfulYesTotal)</span>
+    <span class="icon icon-like"></span>
+</button>
+<button id="vote-no-@(Model.ProductReviewId)" class="dislike" type="button">
+    <span id="helpfulness-vote-no-@(Model.ProductReviewId)" class="text">@(Model.HelpfulNoTotal)</span>
+    <span class="icon icon-like"></span>
+</button>
+
+<span id="helpfulness-vote-result-@(Model.ProductReviewId)" class="result"></span>
+
+
+<script asp-location="Footer">
+    $(function() {
+        $('#vote-yes-@(Model.ProductReviewId)').on('click', function () {
+            setProductReviewHelpfulness@(Model.ProductReviewId)('true');
+        });
+        $('#vote-no-@(Model.ProductReviewId)').on('click', function () {
+            setProductReviewHelpfulness@(Model.ProductReviewId)('false');
+        });
+    });
+
+    function setProductReviewHelpfulness@(Model.ProductReviewId)(wasHelpful) {
+        var postData = {
+            "productReviewId": @(Model.ProductReviewId),
+            "washelpful": wasHelpful
+        };
+        addAntiForgeryToken(postData);
+        $.ajax({
+            cache: false,
+            type: "POST",
+            url: "@(Url.RouteUrl("SetProductReviewHelpfulness"))",
+            data: postData,
+            success: function (data, textStatus, jqXHR) {
+                $("#helpfulness-vote-yes-@(Model.ProductReviewId)").html(data.TotalYes);
+                $("#helpfulness-vote-no-@(Model.ProductReviewId)").html(data.TotalNo);
+                $("#helpfulness-vote-result-@(Model.ProductReviewId)").html(data.Result);
+
+                $('#helpfulness-vote-result-@(Model.ProductReviewId)').fadeIn("slow").delay(1000).fadeOut("slow");
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                alert('Failed to vote. Please refresh the page and try one more time.');
+            }
+        });
+    }
+</script>

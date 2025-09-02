@@ -1,0 +1,125 @@
+.btn {
+  padding: 9px 15px;
+  border-radius: $radius-half;
+  font-weight: 400;
+  font-size: 14px;
+  border: none;
+  white-space: nowrap;
+  @extend .tr-100;
+  @include media-breakpoint-down(md) {
+    padding: 10px 22px;
+    font-size: 13px;
+  }
+}
+
+.btn-primary {
+  display: inline-block;
+  background-color: $primary-color;
+  border: 1px solid $primary-color;
+  color: #fff;
+  &:hover,
+  &:focus,
+  &:active {
+    background-color: #c72126;
+    border-color: #c72126;
+  }
+  span {
+    margin-left: 16px;
+    vertical-align: middle;
+    font-size: 24px;
+    color: #fff;
+  }
+}
+
+.btn-outline-primary {
+  display: inline-block;
+  background-color: transparent;
+  border: 1px solid $primary-color;
+  color: $primary-color;
+  &:hover,
+  &:focus,
+  &:active {
+    background-color: transparent;
+    border-color: #c72126;
+    color: #c72126;
+  }
+  span {
+    margin-left: 16px;
+    vertical-align: middle;
+    font-size: 24px;
+    color: $primary-color;
+  }
+}
+
+.btn-secondary {
+  display: inline-block;
+  background-color: $link-color;
+  border: 1px solid $link-color;
+  color: #fff;
+  &:hover,
+  &:focus,
+  &:active {
+    background-color: #0089ea;
+    border-color: #0089ea;
+  }
+  span {
+    margin-left: 16px;
+    vertical-align: middle;
+    font-size: 24px;
+    color: #fff;
+  }
+}
+
+.btn-light {
+  display: inline-block;
+  background-color: $gray3;
+  border: 1px solid $gray3;
+  color: #fff;
+  &:hover,
+  &:focus,
+  &:active {
+    background-color: $gray3;
+    border-color: $gray3;
+  }
+  span {
+    margin-left: 16px;
+    vertical-align: middle;
+    font-size: 24px;
+    color: #fff;
+  }
+}
+.btn-outline-light {
+  display: inline-block;
+  border: 1px solid $gray4;
+  color: $gray3;
+  background-color: transparent;
+  &:hover,
+  &:focus,
+  &:active {
+    background-color: $gray5;
+  }
+  span {
+    margin-left: 7px;
+    vertical-align: middle;
+    font-size: 24px;
+  }
+}
+
+.btn-light {
+  display: inline-block;
+  color: $gray8;
+  border: none;
+  background-color: transparent;
+  &:hover,
+  &:focus,
+  &:active {
+    color: $gray8;
+      background-color: transparent;
+  }
+  span {
+    margin-left: 7px;
+    vertical-align: middle;
+    font-size: 24px;
+    color: $gray8;
+  }
+}

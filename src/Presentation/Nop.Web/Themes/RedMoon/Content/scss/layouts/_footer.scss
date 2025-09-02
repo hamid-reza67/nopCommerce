@@ -1,0 +1,85 @@
+footer{
+ul{
+    list-style-type: none;
+}
+
+.footer-top {
+  border-bottom: 1px solid #ddd;
+
+  .logo-section {
+    display: flex;
+    align-items: center;
+
+    img {
+      max-height: 50px;
+    }
+
+    span {
+      font-weight: bold;
+      color: #333;
+    }
+
+    p {
+      font-size: 0.9rem;
+    }
+  }
+
+  .btn-back-to-top {
+    border-radius: 20px;
+    padding: 8px 20px;
+    font-size: 0.9rem;
+
+    i {
+      font-size: 1rem;
+    }
+  }
+}
+.footerMain {
+
+  h5 {
+    font-size: 16px;
+    color: #333;
+  }
+
+  p {
+    font-size: 14px;
+  }
+
+  // استایل شبکه‌های اجتماعی
+  .social-icons {
+    a {
+      transition: color 0.3s ease;
+
+      &:hover {
+        color: #007bff !important;
+      }
+    }
+  }
+
+
+  // استایل تماس و ایمیل
+  .contact-info {
+    p {
+      margin-bottom: 0.5rem;
+
+      i {
+        width: 20px;
+      }
+    }
+  }
+
+  // استایل تاییدیه‌ها
+  .enamad, .samandehi {
+    max-width: 80px;
+    margin: 0 10px;
+  }
+
+  // استایل لینک‌ها
+  a.text-muted {
+    transition: color 0.3s ease;
+font-size: 14px;;
+    &:hover {
+      color: $primary-color !important;
+    }
+  }
+}}

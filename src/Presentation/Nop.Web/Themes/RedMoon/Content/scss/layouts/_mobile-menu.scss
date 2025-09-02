@@ -1,0 +1,143 @@
+#mobile-menu {
+  position: fixed;
+  top: 100%;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1500;
+  background-color: #fff;
+  display: flex;
+  align-items: flex-start;
+  @extend .tr-200;
+  .nav-pills {
+    overflow-y: auto;
+    height: calc(100% - 50px);
+    flex-wrap: nowrap;
+    .nav-link {
+      width: 90px;
+      height: 66px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      color: $dark1;
+      background-color: #ececec;
+      border: 1px solid #e4e4e4;
+      @include fontSize(12, 400, 12);
+      border-radius: 0;
+      .icon {
+        font-size: 20px;
+        margin-bottom: 10px;
+      }
+      &.active {
+        background-color: #fff;
+        color: $secondry-color;
+        border-color: #fff;
+      }
+    }
+  }
+
+  .tab-content {
+    flex: 0 0 auto;
+    width: calc(100% - 90px);
+    overflow-y: auto;
+    height: calc(100% - 50px);
+    .view-all {
+      color: $link-color;
+      @include fontSize(12, 400, 12);
+      padding: 12px;
+      display: inline-block;
+      .icon {
+        vertical-align: middle;
+      }
+    }
+    #mobileMenuAccordion {
+      padding: 0 12px;
+      .accordion-item {
+        border-left: none;
+        border-right: none;
+        border-color: #e4e4e4;
+        &:first-of-type {
+          border-radius: 0;
+          border-top: none;
+          & > .accordion-header {
+            .accordion-button {
+              border-radius: 0;
+            }
+          }
+        }
+        .accordion-header {
+          .accordion-button {
+            @include fontSize(12, 400, 12);
+            padding: 15px 0;
+            &:not(.collapsed) {
+              background-color: #fff;
+              color: $dark1;
+              box-shadow: none;
+            }
+            &:focus {
+              box-shadow: none;
+            }
+            &::after {
+              color: $dark1;
+              height: 16px;
+              width: 16px;
+              background-size: 16px;
+              margin-right: auto;
+              margin-left: initial;
+            }
+          }
+        }
+        .accordion-body {
+          padding: 12px 0;
+          display: flex;
+          align-items: center;
+          justify-content: flex-start;
+          flex-wrap: wrap;
+          .mobile-menu-box {
+            width: 33.3333%;
+            flex: 0 0 auto;
+            text-align: center;
+            .header {
+              padding: 12px;
+              .image-wrapper {
+                margin: 0 auto;
+                width: 45px;
+                height: 45px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                border-radius: 50%;
+                background-color: $gray9;
+                img {
+                  height: auto;
+                  width: 100%;
+                  object-fit: contain;
+                  mix-blend-mode: darken;
+                }
+              }
+            }
+            .body {
+              @include fontSize(12, 400, 12);
+              color: #000;
+              margin-bottom: 20px;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .close-button {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    color: #fff;
+    font-size: 24px;
+    cursor: pointer;
+
+    &:hover {
+      color: #f39c12; // Example hover color
+    }
+  }
+}

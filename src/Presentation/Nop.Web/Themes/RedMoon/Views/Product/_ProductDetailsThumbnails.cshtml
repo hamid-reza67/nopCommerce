@@ -1,0 +1,15 @@
+﻿@model ProductDetailsModel
+
+<div class="swiper product-thumb-slider">
+    <div class="swiper-wrapper">
+        @if (Model.PictureModels.Count > 1)
+        {
+            @foreach (var picture in Model.PictureModels)
+            {
+                <div class="swiper-slide">
+                    <img alt="@picture.AlternateText" src="@picture.ImageUrl" title="@picture.Title" />
+                </div>
+            }
+        }
+    </div>
+</div>

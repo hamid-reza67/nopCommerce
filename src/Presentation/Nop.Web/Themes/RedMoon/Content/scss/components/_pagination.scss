@@ -1,0 +1,43 @@
+.pagination {
+  .page-item {
+    margin: 0 6px;
+
+    .page-link {
+      border: none;
+      border-radius: 50%;
+      color: #000;
+      &:focus {
+        background-color: transparent;
+        box-shadow: none;
+      }
+    }
+    &.previous {
+      margin-left: auto;
+      .page-link {
+        color: $primary-color;
+        @include fontSize(14,400,14);
+      }
+    }
+    &.next {
+      margin-right: auto;
+      .page-link {
+        @include fontSize(14,400,14);
+        color: $primary-color;
+    }
+}
+    &:not(.previous),
+    &:not(.next) {
+      .page-link {
+        height: 44px;
+        width: 44px;
+        @extend .flex-center;
+      }
+    }
+    &.active {
+      .page-link {
+        color: #fff;
+        background-color: $primary-color;
+      }
+    }
+  }
+}

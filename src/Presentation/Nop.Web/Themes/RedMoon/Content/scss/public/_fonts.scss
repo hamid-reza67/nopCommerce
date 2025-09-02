@@ -1,0 +1,32 @@
+@mixin font($font-family, $font-style, $font-weight, $font-src) {
+  @font-face {
+    font-family: $font-family;
+    font-style: $font-style;
+    font-weight: $font-weight;
+    // src: url($font-src + '.eot');
+    // src: url($font-src + '.eot?#iefix') format('embedded-opentype'),
+    src: url($font-src + '.woff') format('woff'),
+      url($font-src + '.woff2') format('woff2');
+  }
+}
+
+@mixin fontSize($size, $weight, $line-hight) {
+  font-size: $size + px;
+  font-weight: $weight;
+  line-height: $line-hight + px;
+}
+
+@include font('yekan', normal, 300, '../font/yekan-bakh/YekanBakhFaNum-Light');
+@include font('yekan', normal, 400, '../font/yekan-bakh/YekanBakhFaNum-Regular');
+@include font('yekan', normal, 600, '../font/yekan-bakh/YekanBakhFaNum-SemiBold');
+
+@include font('yekan', normal, 700, '../font/yekan-bakh/YekanBakhFaNum-Bold');
+@include font('yekan', normal, 800, '../font/yekan-bakh/YekanBakhFaNum-ExtraBold');
+
+
+@include font('poppins', normal, 300, '../font/poppins/Poppins-Light');
+@include font('poppins', normal, 400, '../font/poppins/Poppins-Regular');
+@include font('poppins', normal, 600, '../font/poppins/Poppins-SemiBold');
+
+@include font('poppins', normal, 700, '../font/poppins/Poppins-Bold');
+@include font('poppins', normal, 800, '../font/poppins/Poppins-ExtraBold');

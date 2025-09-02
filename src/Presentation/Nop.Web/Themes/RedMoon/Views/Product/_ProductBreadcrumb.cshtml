@@ -1,0 +1,41 @@
+﻿@model ProductDetailsModel.ProductBreadcrumbModel
+
+@using Nop.Core.Domain.Catalog
+@using Nop.Core.Domain.Common
+
+@inject CommonSettings commonSettings
+
+@{
+    var breadcrumbDelimiter = commonSettings.BreadcrumbDelimiter;
+
+    NopHtml.AddJsonLdParts(Model.JsonLd);
+}
+@if (Model.Enabled)
+{
+    <section>
+        <div class="container">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    @await Component.InvokeAsync(typeof(WidgetViewComponent), new { widgetZone = PublicWidgetZones.ProductBreadcrumbBefore, additionalData = Model })
+                    <li class="breadcrumb-item">
+                        <a href="@Url.RouteUrl("Homepage")">
+                            @T("Products.Breadcrumb.Top")
+                        </a>
+                    </li>
+                    @foreach (var category in Model.CategoryBreadcrumb)
+                    {
+                        <li class="breadcrumb-item">
+                            <a href="@(Url.RouteUrl<Category>(new { SeName = category.SeName }))">
+                                @category.Name
+                            </a>
+                        </li>
+                    }
+                    <li class="breadcrumb-item active">
+                        @Model.ProductName
+                        @await Component.InvokeAsync(typeof(WidgetViewComponent), new { widgetZone = PublicWidgetZones.ProductBreadcrumbAfter, additionalData = Model })
+                    </li>
+                </ol>
+            </nav>
+        </div>
+    </section>
+}

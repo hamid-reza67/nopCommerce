@@ -1,0 +1,31 @@
+﻿@model ProductDetailsModel
+
+
+<div class="swiper product-slider">
+    @await Component.InvokeAsync(typeof(WidgetViewComponent), new { widgetZone = PublicWidgetZones.ProductDetailsBeforePictures, additionalData = Model })
+    <div class="swiper-wrapper">
+        @if (Model.PictureModels.Count > 1 && Model.DefaultPictureZoomEnabled)
+        {
+            @foreach (var picture in Model.PictureModels)
+            {
+                <div class="swiper-slide">
+                    <a href="@picture.FullSizeImageUrl" data-fancybox="gallery" title="@picture.Title">
+                        <img alt="@picture.AlternateText" src="@picture.ImageUrl" title="@picture.Title" />
+                    </a>
+                </div>
+            }
+        }
+        else
+        {
+            @foreach (var picture in Model.PictureModels)
+            {
+                <div class="swiper-slide">
+                    <a href="javascript:void;" title="@picture.Title">
+                        <img alt="@picture.AlternateText" src="@picture.ImageUrl" title="@picture.Title" />
+                    </a>
+                </div>
+            }
+        }
+    </div>
+    <div class="swiper-pagination"></div>
+</div>

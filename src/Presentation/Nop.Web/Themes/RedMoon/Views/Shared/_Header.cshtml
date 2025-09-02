@@ -1,0 +1,35 @@
+﻿@await Component.InvokeAsync(typeof(WidgetViewComponent), new { widgetZone = PublicWidgetZones.HeaderBefore })
+<header>
+    <div class="top-bar">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-auto d-none d-lg-block">
+                    @await Component.InvokeAsync(typeof(LogoViewComponent))
+                </div>
+                <div class="col-lg-4">
+                    <div class="search-box store-search-box">
+                        @await Component.InvokeAsync(typeof(SearchBoxViewComponent))
+                    </div>
+                </div>
+                <div class="col-lg-auto ms-auto d-none d-lg-block">
+                    <div class="d-flex align-items-center">
+                        @await Component.InvokeAsync(typeof(HeaderLinksViewComponent))
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="bottom-bar">
+        <div class="container">
+            <div class="d-flex align-items-end justify-content-between">
+                @await Component.InvokeAsync(typeof(TopMenuViewComponent))
+                <div class="call-to-action d-none d-lg-flex">
+                    <div class="title">پشتیبانی و فروش </div>
+                    <div class="number">031-55556354</div>
+                    <div class="span icon icon-call"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+@await Component.InvokeAsync(typeof(WidgetViewComponent), new { widgetZone = PublicWidgetZones.HeaderAfter })

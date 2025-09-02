@@ -1,0 +1,141 @@
+﻿@model FooterModel
+
+@using Nop.Core
+@using Nop.Core.Domain.Tax
+@using Nop.Core.Domain.Topics
+
+@inject IWorkContext workContext
+@inject IThemeContext themeContext
+
+<footer class="mt-4">
+    <!-- بخش بالای فوتر (لوگو و بازگشت به بالا)-->
+    <div class="footer-top bg-light py-4">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-md-6 mb-3 mb-md-0">
+                    <div class="logo-section">
+                        @await Component.InvokeAsync(typeof(LogoViewComponent))
+                        <p class="text-muted mb-0">فروشگاه آنلاین محصولات ایرانی</p>
+                    </div>
+                </div>
+                <div class="col-md-6 text-end">
+                    <a class="btn btn-outline-primary btn-back-to-top" href="#"><i class="icon icon-arrow-up me-2"></i>بازگشت به بالا</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- فوتر اصلی-->
+    <div class="footerMain bg-light pt-5">
+        <div class="container">
+            <!-- خدمات و ویژگی‌ها-->
+            <div class="row text-center mb-4">
+                <div class="col-md-3 mb-3">
+                    <i class="fas fa-truck text-primary fa-2x"></i>
+                    <h5 class="mt-2">ارسال سریع</h5>
+                    <p class="text-muted">ارسال سریع و رایگان برای خریدهای بالای ۵۰۰,۰۰۰ تومان</p>
+                </div>
+                <div class="col-md-3 mb-3">
+                    <i class="fas fa-undo text-primary fa-2x"></i>
+                    <h5 class="mt-2">بازگشت کالا</h5>
+                    <p class="text-muted">امکان بازگشت کالا تا ۷ روز پس از دریافت</p>
+                </div>
+                <div class="col-md-3 mb-3">
+                    <i class="fas fa-shield-alt text-primary fa-2x"></i>
+                    <h5 class="mt-2">پرداخت امن</h5>
+                    <p class="text-muted">پرداخت امن با انواع کارت‌های بانکی</p>
+                </div>
+                <div class="col-md-3 mb-3">
+                    <i class="fas fa-headset text-primary fa-2x"></i>
+                    <h5 class="mt-2">پشتیبانی ۲۴/۷</h5>
+                    <p class="text-muted">پشتیبانی ۲۴ ساعته، ۷ روز هفته</p>
+                </div>
+            </div>
+            <!-- لینک‌های مفید و شبکه‌های اجتماعی-->
+            <div class="row mb-4">
+                <div class="col-md-3 mb-3">
+                    <h5 class="mb-3">@T("Footer.FollowUs")</h5>
+                    @await Component.InvokeAsync(typeof(SocialButtonsViewComponent))
+                    <div class="contact-info mt-3">
+                        <p class="text-muted"><i class="fas fa-phone ms-2">031-21541254</i></p>
+                        <p class="text-muted"><i class="fas fa-envelope ms-2">info@example.com</i></p>
+                    </div>
+                </div>
+                <div class="col-md-3 mb-3">
+                    <h5 class="mb-3">@T("Footer.Information")</h5>
+                    <ul class="list-unstyled">
+                        @if (Model.SitemapEnabled && Model.DisplaySitemapFooterItem)
+                        {
+                            <li class="mb-2"><a href="@Url.RouteUrl("Sitemap")" class="text-decoration-none text-muted">@T("Sitemap")</a></li>
+                        }
+                        @foreach (var topic in Model.Topics.Where(x => x.IncludeInFooterColumn1).ToList())
+                        {
+                            <li class="mb-2"><a href="@(Url.RouteUrl<Topic>(new { SeName = topic.SeName }))" class="text-decoration-none text-muted">@topic.Name</a></li>
+                        }
+                        @if (Model.DisplayContactUsFooterItem)
+                        {
+                            <li class="mb-2"><a href="@Url.RouteUrl("ContactUs")" class="text-decoration-none text-muted">@T("ContactUs")</a></li>
+                        }
+                    </ul>
+                </div>
+                <div class="col-md-3 mb-3">
+                    <h5 class="mb-3">@T("Footer.CustomerService")</h5>
+                    <ul class="list-">
+                        @if (Model.SearchEnabled && Model.DisplayProductSearchFooterItem)
+                        {
+                            <li class="mb-2"><a class="text-decoration-none text-muted" href="@Url.RouteUrl("ProductSearch")">@T("Search")</a> </li>
+                        }
+                        @if (Model.NewsEnabled && Model.DisplayNewsFooterItem)
+                        {
+                            <li class="mb-2"><a class="text-decoration-none text-muted" href="@Url.RouteUrl("NewsArchive")">@T("News")</a></li>
+                        }
+                        @if (Model.BlogEnabled && Model.DisplayBlogFooterItem)
+                        {
+                            <li class="mb-2"><a class="text-decoration-none text-muted" href="@Url.RouteUrl("Blog")">@T("Blog")</a></li>
+                        }
+                        @if (Model.ForumEnabled && Model.DisplayForumsFooterItem)
+                        {
+                            <li class="mb-2"><a class="text-decoration-none text-muted" href="@Url.RouteUrl("Boards")">@T("Forum.Forums")</a></li>
+                        }
+                        @if (Model.RecentlyViewedProductsEnabled && Model.DisplayRecentlyViewedProductsFooterItem)
+                        {
+                            <li class="mb-2"><a class="text-decoration-none text-muted" href="@Url.RouteUrl("RecentlyViewedProducts")">@T("Products.RecentlyViewedProducts")</a></li>
+                        }
+                        @if (Model.CompareProductsEnabled && Model.DisplayCompareProductsFooterItem)
+                        {
+                            <li class="mb-2"><a class="text-decoration-none text-muted" href="@Url.RouteUrl("CompareProducts")">@T("Products.Compare.List")</a></li>
+                        }
+                        @if (Model.NewProductsEnabled && Model.DisplayNewProductsFooterItem)
+                        {
+                            <li class="mb-2"><a class="text-decoration-none text-muted" href="@Url.RouteUrl("NewProducts")">@T("Products.NewProducts")</a></li>
+                        }
+                        @foreach (var topic in Model.Topics.Where(x => x.IncludeInFooterColumn2).ToList())
+                        {
+                            <li class="mb-2"><a class="text-decoration-none text-muted" href="@(Url.RouteUrl<Topic>(new { SeName = topic.SeName }))">@topic.Name</a></li>
+                        }
+                        @if (Model.AllowCustomersToCheckGiftCardBalance)
+                        {
+                            <li class="mb-2"><a class="text-decoration-none text-muted" href="@Url.RouteUrl("CheckGiftCardBalance")">@T("CheckGiftCardBalance")</a></li>
+                        }
+                    </ul>
+                </div>
+                <div class="col-md-3 mb-3">
+                    <h5 class="mb-3">تاییدیه‌ها و مجوزها</h5>
+                    <div class="d-flex justify-content-around">
+                        @{
+                            var themeName = await themeContext.GetWorkingThemeNameAsync();
+                        };
+                        <img class="img-fluid w-50" src="/Themes/@themeName/Content/img/enamad.png" alt="اینماد">
+                        <img class="img-fluid w-50" src="/Themes/@themeName/Content/img/samandehi.png" alt="ساماندهی">
+                    </div>
+                </div>
+            </div>
+            <!-- کپی رایت و لینک‌های پایانی-->
+            <div class="row border-top pt-3">
+                <div class="col-md-6 text-muted mb-2">
+                    <p>@T("Content.CopyrightNotice", DateTime.Now.Year, Model.StoreName)</p>
+                </div>
+                <div class="col-md-6 text-end"><a class="text-decoration-none d-inline-block text-muted me-3" href="#">حریم خصوصی</a><a class="text-decoration-none d-inline-block text-muted me-3" href="#">شرایط استفاده</a><a class="text-decoration-none d-inline-block text-muted" href="#">تماس با ما</a></div>
+            </div>
+        </div>
+    </div>
+</footer>

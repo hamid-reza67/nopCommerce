@@ -1,0 +1,123 @@
+﻿@model TopMenuModel
+
+@using Nop.Core.Domain.Catalog
+@using Nop.Core.Domain.Topics
+@inject IThemeContext themeContext
+
+
+
+@functions {
+    async Task CategoryLine(TopMenuModel.CategoryLineModel lineModel)
+    {
+        var menuClass = "";
+        @if (lineModel.Category.NumberOfProducts.HasValue)
+        {
+            menuClass = "has-children";
+        }
+        //subcategories
+        var subCategories = lineModel.ResponsiveMobileMenu ?
+        //responsive (all categories)
+        lineModel.Category.SubCategories :
+        //standard design (only categories with "IncludeInTopMenu")
+        lineModel.Category.SubCategories.Where(x => x.IncludeInTopMenu).ToList();
+        if (lineModel.Level == 0)
+        {
+            @foreach (var subCategory in subCategories)
+            {
+                var categoryLineModel = new TopMenuModel.CategoryLineModel
+                    {
+                        Category = subCategory,
+                        Level = lineModel.Level + 1,
+                        ResponsiveMobileMenu = lineModel.ResponsiveMobileMenu
+                    };
+                await CategoryLine(categoryLineModel);
+            }
+        }
+        else if (lineModel.Level == 1)
+        {
+            var themeName = await themeContext.GetWorkingThemeNameAsync();
+            var menuImg = $"/Themes/{themeName}/Content/svg/camera.svg";
+            <li>
+                <a class="menu-link @menuClass" href="#">
+                    <img src="@menuImg" alt="" srcset="" height="18" width="18">@lineModel.Category.Name
+                </a>
+                @{
+                    if (subCategories.Count > 0)
+                    {
+                        <div class="menu-level-2">
+                            <a class="view-all" href="@(Url.RouteUrl<Category>(new { SeName = lineModel.Category.SeName }))">همه محصولات @lineModel.Category.Name<span class="icon icon-arrow-left-chevron"></span></a>
+                            <ul>
+                                @foreach (var subCategory in subCategories)
+                                {
+                                    var categoryLineModel = new TopMenuModel.CategoryLineModel
+                        {
+                            Category = subCategory,
+                            Level = lineModel.Level + 1,
+                            ResponsiveMobileMenu = lineModel.ResponsiveMobileMenu
+                        };
+                                    await CategoryLine(categoryLineModel);
+                                }
+                            </ul>
+                        </div>
+                    }
+                }
+            </li>
+        }
+        else if (lineModel.Level == 2)
+        {
+            <li>
+                <a href="@(Url.RouteUrl<Category>(new { SeName = lineModel.Category.SeName }))">@lineModel.Category.Name</a>
+                <ul class="menu-level-3">
+                    @foreach (var subCategory in subCategories)
+                    {
+                        var categoryLineModel = new TopMenuModel.CategoryLineModel
+                    {
+                        Category = subCategory,
+                        Level = lineModel.Level + 1,
+                        ResponsiveMobileMenu = lineModel.ResponsiveMobileMenu
+                    };
+                        await CategoryLine(categoryLineModel);
+                    }
+                </ul>
+            </li>
+        }
+        else
+        {
+            <li><a href="@(Url.RouteUrl<Category>(new { SeName = lineModel.Category.SeName }))">@lineModel.Category.Name</a></li>
+        }
+    }
+}
+
+<nav class="d-none d-lg-block">
+    <menu class="main-menu">
+        @await Component.InvokeAsync(typeof(WidgetViewComponent), new { widgetZone = PublicWidgetZones.HeaderMenuBefore, additionalData = Model })
+
+        @if (!Model.UseAjaxMenu)
+        {
+            var rootCategories = Model.Categories.Where(x => x.IncludeInTopMenu).ToList();
+            <li class="menu-item">
+                <a class="nav-link" href="#"> <span class="icon icon-menu"> </span>دسته بندی کالاها</a>
+                <div class="mega-menu">
+                    <ul class="menu-level-1">
+                        @foreach (var category in rootCategories)
+                        {
+                            var categoryLineModel = new TopMenuModel.CategoryLineModel
+                    {
+                        Category = category
+                    };
+                            await CategoryLine(categoryLineModel);
+                        }
+                    </ul>
+                </div>
+            </li>
+
+        }
+        <li class="menu-item"><a class="nav-link" href="#">شگفت انگیزها</a></li>
+        <li class="menu-item"><a class="nav-link" href="#">کارت هدیه</a></li>
+        <li class="menu-item"><a class="nav-link" href="#">پر فروش ترین ها</a></li>
+        <li class="menu-item"><a class="nav-link" href="#">تخفیف ها و پیشنهادها</a></li>
+        <li class="menu-item"><a class="nav-link" href="#">لیست قیمت</a></li>
+        <li class="menu-item"><a class="nav-link" href="#">بلاگ</a></li>
+    </menu>
+</nav>
+

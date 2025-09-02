@@ -1,0 +1,398 @@
+.product-content {
+  .main-image {
+    display: flex;
+    align-items: stretch;
+    .main-slider {
+      width: calc(100% - 56px);
+    }
+    .action-bar {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      button,
+      a {
+        background-color: transparent;
+        border: none;
+        padding: 8px 16px;
+        line-height: 0;
+        span.icon {
+          font-size: 24px;
+          color: $gray6;
+        }
+      }
+    }
+  }
+
+  .product-info {
+    .main-title {
+      @include fontSize(18, 600, 28);
+      color: $dark1;
+      margin-bottom: 3px;
+    }
+    .en-title {
+      @include fontSize(12, 300, 12);
+      color: $gray7;
+      margin-bottom: 12px;
+    }
+    .rating {
+      margin-bottom: 22px;
+      display: flex;
+      align-items: baseline;
+      .icon {
+        color: $yellow;
+        font-size: 12px;
+        margin-left: 4px;
+      }
+      .text {
+        @include fontSize(12, 400, 12);
+        color: #000;
+        margin-left: 4px;
+      }
+      .summary {
+        @include fontSize(12, 400, 12);
+        color: $gray2;
+      }
+    }
+    .product-variation {
+      margin-bottom: 42px;
+      .title {
+        @include fontSize(14, 600, 14);
+        margin-bottom: 12px;
+        color: $dark1;
+      }
+      .variation-radio {
+        @extend .flex-center;
+        justify-content: flex-start;
+        .radio {
+          border: 1px solid $gray4;
+          border-radius: 40px;
+          padding: 4px;
+          margin-left: 12px;
+          height: 40px;
+          input[type='radio'] {
+            display: none;
+            &:checked + label::before {
+              border-color: #44b96b;
+            }
+            &:checked + label::after {
+              opacity: 1;
+              font-family: etminan;
+              content: '\e935';
+              color: #44b96b;
+              font-size: 18px;
+            }
+          }
+          /* طراحی باکس سفارشی */
+          label {
+            position: relative;
+            padding-right: 38px;
+            padding-left: 8px;
+            cursor: pointer;
+            @include fontSize(14, 600, 31);
+            color: #000;
+            display: block;
+
+            /* طراحی تیک */
+            &::before {
+              content: '';
+              position: absolute;
+              right: 0;
+              top: 0;
+              width: 29px;
+              height: 29px;
+              border: 1px solid $gray4;
+              border-radius: 50%;
+              background-color: #fff;
+            }
+
+            /* طراحی تیک داخلی */
+            &::after {
+              content: '';
+              position: absolute;
+              right: 5px;
+              top: 0;
+              opacity: 0;
+              transition: opacity 0.2s;
+            }
+          }
+        }
+      }
+    }
+
+    .product-attribute {
+      .title {
+        @include fontSize(14, 600, 14);
+        margin-bottom: 12px;
+        color: $dark1;
+      }
+      .attr-boxes {
+        @extend .flex-center;
+        justify-content: flex-start;
+        flex-wrap: wrap;
+        .attr {
+          padding: 8px 12px;
+          border-radius: $radius-half;
+          background-color: $gray10;
+          margin-left: 12px;
+          margin-bottom: 12px;
+          .title {
+            color: $gray6;
+            @include fontSize(12, 400, 12);
+          }
+          .value {
+            color: $dark1;
+            @include fontSize(12, 600, 12);
+          }
+        }
+      }
+    }
+  }
+  @media (min-width: 992px) {
+    .right-content {
+      flex: 0 0 auto;
+      width: 55%;
+    }
+    .left-content {
+      flex: 0 0 auto;
+      width: 45%;
+    }
+  }
+
+  .payment {
+    z-index: 3;
+    padding: 24px 12px;
+    border: 1px solid $gray9;
+    border-radius: $radius-half;
+    top: 12px;
+    .prices {
+      margin-bottom: 24px;
+      .main-price {
+        margin-bottom: 4px;
+        @extend .flex-center;
+        justify-content: space-between;
+        .title {
+          @include fontSize(14, 400, 14);
+          color: #000;
+        }
+        .price {
+          @include fontSize(16, 600, 16);
+          color: #292d32;
+        }
+      }
+      .discount-price {
+        @extend .flex-center;
+        justify-content: space-between;
+        .badge {
+          @include fontSize(10, 300, 23);
+          border-radius: 50px;
+          color: $dark1;
+          border: 1px solid $gray8;
+          padding: 1px 11px;
+        }
+        .offer {
+          @extend .flex-center;
+          justify-content: space-between;
+          .price {
+            @include fontSize(12, 600, 12);
+            color: $gray8;
+            text-decoration: line-through;
+            margin-left: 5px;
+          }
+          .offer-badge {
+            background-color: $primary-color;
+            color: #fff;
+            border-radius: 20px 20px 20px 0;
+            @include fontSize(14, 400, 14);
+            padding: 5px 5px 3px;
+          }
+        }
+      }
+    }
+
+    #add-to-cart {
+      width: 100%;
+      font-weight: 400;
+      margin-bottom: 12px;
+    }
+
+    .my-features {
+      border-bottom: 1px solid $gray9;
+      .feature {
+        @extend .flex-center;
+        justify-content: flex-start;
+        margin-bottom: 9px;
+        .title {
+          @include fontSize(12, 300, 12);
+          margin-right: 8px;
+          color: $gray6;
+        }
+      }
+    }
+    .club {
+      display: flex;
+      justify-content: flex-start;
+      align-items: flex-start;
+      margin-bottom: 0;
+      margin-top: 14px;
+      .title {
+        @include fontSize(12, 400, 23);
+        margin-right: 3px;
+        color: $gray6;
+      }
+    }
+  }
+
+  #navbar-info {
+    margin-top: 54px;
+    margin-bottom: 32px;
+    position: sticky !important;
+    background-color: #fff;
+    .nav-pills {
+      width: 100%;
+      border-bottom: 1px solid $gray9;
+      .nav-item {
+        .nav-link {
+          @include fontSize(12, 400, 12);
+          color: $gray2;
+          padding: 12px;
+          &.active {
+            background-color: transparent;
+            color: $primary-color;
+            position: relative;
+            &::after {
+              content: '';
+              position: absolute;
+              background-color: $primary-color;
+              height: 4px;
+              border-radius: 4px;
+              width: 100%;
+              bottom: 0;
+              left: 0;
+              right: 0;
+            }
+          }
+        }
+      }
+    }
+  }
+  .scrollspy-content {
+    .expander {
+      .title {
+        @include fontSize(14, 400, 23);
+        margin-bottom: 9px;
+        color: #000;
+        position: relative;
+        padding-right: 7px;
+        &::before {
+          content: '';
+          position: absolute;
+          height: 100%;
+          width: 3px;
+          background-color: $primary-color;
+          border-radius: 3px 0 0 3px;
+          right: 0;
+          top: 0;
+          bottom: 0;
+        }
+      }
+      .content {
+        p {
+          font-size: 14px;
+          line-height: 28px;
+        }
+        .attribute {
+          margin-top: 24px;
+          margin-bottom: 24px;
+          .attribute-title {
+            @include fontSize(14, 400, 23);
+            color: #000;
+          }
+          .attribute-wrap {
+            display: flex;
+            align-items: center;
+            margin-bottom: 6px;
+            .attr-title,
+            .attr-value {
+              flex-direction: 0 0 auto;
+              background-color: $gray10;
+              @include fontSize(14, 300, 23);
+              color: $gray6;
+              padding: 7px;
+              margin-left: 6px;
+            }
+            .attr-title {
+              width: 20%;
+            }
+            .attr-value {
+              width: 80%;
+              margin-left: 0;
+              @include fontSize(14, 400, 23);
+              color: $dark1;
+            }
+          }
+        }
+      }
+      .show-more {
+        background-color: transparent;
+        color: $link-color;
+        border: none;
+        @include fontSize(14, 400, 24);
+        padding: 0 12px;
+        padding-right: 0;
+        .icon {
+          vertical-align: middle;
+        }
+      }
+      .divider {
+        height: 4px;
+        width: 100%;
+        border-radius: 4px;
+        background-color: $gray;
+        margin: 40px 0;
+      }
+    }
+  }
+
+  .comments-stats {
+    z-index: 3;
+    top: 68px;
+    .count {
+      margin-top: 10px;
+      color: #000;
+      @include fontSize(20, 400, 23);
+      margin-bottom: 6px;
+      span {
+        margin-right: 4px;
+        @include fontSize(12, 400, 23);
+        display: inline-block;
+      }
+    }
+    .rating {
+      display: flex;
+      align-items: center;
+      margin-bottom: 16px;
+      .stars > * {
+        color: $yellow;
+        line-height: 23px;
+        display: inline-block;
+      }
+      .summary {
+        @include fontSize(12, 400, 23);
+        color: $gray2;
+        margin-right: 5px;
+      }
+    }
+    .send-text {
+      @include fontSize(12, 400, 23);
+      color: #000;
+      margin-bottom: 6px;
+    }
+    #comment-btn {
+      margin-bottom: 10px;
+    }
+    .send-summary {
+      @include fontSize(12, 400, 23);
+      color: $gray2;
+    }
+  }
+}

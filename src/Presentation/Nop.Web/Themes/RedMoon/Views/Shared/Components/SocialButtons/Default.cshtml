@@ -1,0 +1,24 @@
+﻿@model SocialModel
+
+<div class="social-icons">
+	@if (!string.IsNullOrEmpty(Model.FacebookLink))
+	{
+        <a class="ms-3" href="@Model.FacebookLink" target="_blank" rel="noopener noreferrer"><span class="icon icon-facebook text-muted"></span></a>
+	}
+	@if (!string.IsNullOrEmpty(Model.TwitterLink))
+	{
+        <a class="ms-3" href="@Model.TwitterLink" target="_blank" rel="noopener noreferrer"><span class="icon icon-twitter text-muted"></span></a>
+	}
+	@if (Model.NewsEnabled)
+	{
+        <a class="ms-3" href="@Url.RouteUrl("NewsRSS", new {languageId = Model.WorkingLanguageId})"><span class="icon icon-rss text-muted"></span></a>
+	}
+	@if (!string.IsNullOrEmpty(Model.YoutubeLink))
+	{
+        <a class="ms-3" href="@Model.YoutubeLink" target="_blank" rel="noopener noreferrer"><span class="icon icon-youtube text-muted"></span></a>
+	}
+	@if (!string.IsNullOrEmpty(Model.InstagramLink))
+	{
+        <a class="ms-3" href="@Model.InstagramLink" target="_blank" rel="noopener noreferrer"><span class="icon icon-instagram text-muted"></span></a>
+	}
+</div>

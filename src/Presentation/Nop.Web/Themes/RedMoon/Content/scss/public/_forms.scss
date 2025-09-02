@@ -1,0 +1,63 @@
+::placeholder {
+  @include fontSize(14, 300, 14);
+  color: #464646;
+}
+.form-control {
+  height: 42px;
+  border-radius: $radius-half;
+  &:focus {
+    box-shadow: none;
+  }
+}
+
+.form-check {
+  padding-left: initial;
+  padding-right: 0;
+  min-height: initial;
+  display: flex;
+  align-items: center;
+  .form-check-input {
+    float: right;
+    margin: 0;
+    margin-left: 7px;
+    border-color: #a3a3a3;
+    border: 2px solid #292d32;
+    height: 16px;
+    width: 16px;
+    background-size: 16px;
+    &:focus {
+      box-shadow: none;
+    }
+    &:checked {
+      background-color: $primary-color;
+      border-color: $primary-color;
+    }
+  }
+}
+
+.search-form {
+  position: relative;
+  .form-control {
+    background-color: $gray;
+    border: 1px solid transparent;
+    transition: all 0.1s ease-in-out;
+    &:focus {
+      background-color: #f7f7f7;
+      border: 1px solid #e7e7e7;
+    }
+  }
+  .icon {
+    position: absolute;
+    left: 10px;
+    top: 9px;
+    font-size: 24px;
+    color: $gray2;
+  }
+  .search-image {
+    position: absolute;
+    right: 136px;
+    top: 13px;
+    display: inline-block;
+    height: 20px;
+  }
+}

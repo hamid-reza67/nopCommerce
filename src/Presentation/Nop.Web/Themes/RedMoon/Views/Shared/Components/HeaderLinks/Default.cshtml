@@ -1,0 +1,41 @@
+﻿@model HeaderLinksModel
+@using Nop.Core.Domain.Customers
+@inject Nop.Core.IWebHelper webHelper
+
+
+
+@await Component.InvokeAsync(typeof(WidgetViewComponent), new { widgetZone = PublicWidgetZones.HeaderLinksBefore, additionalData = Model })
+@if (!Model.IsAuthenticated)
+{
+    var returnUrl = Context.Request.Query.TryGetValue("returnUrl", out var url) && !StringValues.IsNullOrEmpty(url)
+        ? url.ToString()
+        : webHelper.GetRawUrl(Context.Request);
+
+    <a class="btn btn-outline-light" href="@Url.RouteUrl("Login", new { returnUrl })" id="login">
+        <span class="icon icon-login"></span>ورود | ثبت نام
+    </a>
+}
+else
+{
+    <div id="user-area">
+        <button class="btn btn-light" id="user-btn"><span class="icon icon-user"></span>@Model.CustomerName</button>
+        <ul class="user-actions">
+            <li> <a href="@Url.RouteUrl("CustomerInfo")"><span class="icon icon-user"></span>پروفایل</a></li>
+            <li> <a href="@Url.RouteUrl("CustomerOrders")"><span class="icon icon-receipt"></span>سفارش های من</a></li>
+            <li> <a href="@Url.RouteUrl("CustomerAddresses")"><span class="icon icon-location"></span>نشانی های من</a></li>
+            @if (Model.WishlistEnabled)
+            {
+                <li> <a href="@Url.RouteUrl("Wishlist")"><span class="icon icon-heart"></span>علاقه مندی ها</a></li>
+            }
+            <li> <a href="@Url.RouteUrl("Logout")"><span class="icon icon-logout"></span>خروج</a></li>
+        </ul>
+    </div>
+}
+<div class="small-basket">
+    <a href="@Url.RouteUrl("ShoppingCart")" class="basket-btn">
+        <span class="icon icon-shopping-cart"></span>
+        <span class="basket-counter" id="basket-counter">@Model.ShoppingCartItems</span>
+    </a>
+    @await Component.InvokeAsync(typeof(FlyoutShoppingCartViewComponent))
+</div>
+
