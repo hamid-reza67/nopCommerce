@@ -7,6 +7,7 @@
 @inject IWorkContext workContext
 @inject IThemeContext themeContext
 
+
 <footer class="mt-4">
     <!-- بخش بالای فوتر (لوگو و بازگشت به بالا)-->
     <div class="footer-top bg-light py-4">
@@ -123,7 +124,7 @@
                     <div class="d-flex justify-content-around">
                         @{
                             var themeName = await themeContext.GetWorkingThemeNameAsync();
-                        };
+                        }
                         <img class="img-fluid w-50" src="/Themes/@themeName/Content/img/enamad.png" alt="اینماد">
                         <img class="img-fluid w-50" src="/Themes/@themeName/Content/img/samandehi.png" alt="ساماندهی">
                     </div>

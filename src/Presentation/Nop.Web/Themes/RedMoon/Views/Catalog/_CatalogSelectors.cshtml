@@ -1,0 +1,134 @@
+﻿@model CatalogProductsModel
+
+@if (Model.Products.Count <= 0 &&
+!Model.PriceRangeFilter.Enabled &&
+!Model.SpecificationFilter.Enabled &&
+!Model.ManufacturerFilter.Enabled)
+{
+    return;
+}
+
+<div class="product-selectors">
+    @*view mode*@
+    @* @if (Model.AllowProductViewModeChanging) *@
+    @* { *@
+    @*     <div class="product-viewmode"> *@
+    @*         <span>@T("Catalog.ViewMode")</span> *@
+    @*         @if (Model.AvailableViewModes.Count > 1) *@
+    @*         { *@
+    @*             var gridMode = Model.AvailableViewModes[0]; *@
+    @*             var listMode = Model.AvailableViewModes[1]; *@
+
+    @*             <a class="viewmode-icon grid @if (gridMode.Selected){<text>selected</text>}" data-viewmode="@gridMode.Value" title="@gridMode.Text" tabindex="0" aria-role="button" href="#">@gridMode.Text</a> *@
+    @*             <a class="viewmode-icon list @if (listMode.Selected){<text>selected</text>}" data-viewmode="@listMode.Value" title="@listMode.Text" tabindex="0" aria-role="button" href="#">@listMode.Text</a> *@
+    @*         } *@
+    @*     </div> *@
+    @*     <script asp-location="Footer"> *@
+    @*         $(function() { *@
+    @*             var $viewModeEls = $('[data-viewmode]'); *@
+    @*             $viewModeEls.on('click', function () { *@
+    @*                 if (!$(this).hasClass('selected')) { *@
+    @*                     $viewModeEls.toggleClass('selected'); *@
+    @*                     CatalogProducts.getProducts(); *@
+    @*                 } *@
+    @*                 return false; *@
+    @*             }); *@
+
+    @*             $(CatalogProducts).on('before', function (e) { *@
+    @*                 var $viewModeEl = $('[data-viewmode].selected'); *@
+    @*                 if ($viewModeEl) { *@
+    @*                     e.payload.urlBuilder *@
+    @*                         .addParameter('viewmode', $viewModeEl.data('viewmode')); *@
+    @*                 } *@
+    @*             }); *@
+    @*         }); *@
+    @*     </script> *@
+    @* } *@
+
+    @if (Model.AllowProductSorting)
+    {
+        <div class="product-actions">
+            <div class="row">
+                <div class="col-12 col-md-10">
+                    <div class="sorting">
+                        <div class="header">
+                            <span class="icon icon-arrow-swap"></span>
+                            <div class="text">مرتب سازی: </div>
+                        </div>
+                        <div class="body">
+                            <ul>
+                                @foreach (var sort in Model.AvailableSortOptions)
+                                {
+                                    var active = sort.Selected ? "active" : "";
+                                    <li> <a href="javascript:;" class="sort-products @active" data-value="@sort.Value">@sort.Text</a></li>
+                                }
+
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-md-2 text-end">
+                    <div class="products-count">248 کالا</div>
+                </div>
+            </div>
+        </div>
+
+        @* <div class="product-sorting"> *@
+        @*     <span>@T("Catalog.OrderBy")</span> *@
+        @*     @Html.DropDownList("products-orderby", Model.AvailableSortOptions, new { aria_label = T("Catalog.OrderBy.Label") }) *@
+        @* </div> *@
+        @* <script asp-location="Footer"> *@
+        @*     $(function() { *@
+        @*         var $orderByEl = $('#products-orderby'); *@
+        @*         $orderByEl.on('change', function () { *@
+        @*             CatalogProducts.getProducts(); *@
+        @*         }); *@
+
+        @*         $(CatalogProducts).on('before', function (e) { *@
+        @*             e.payload.urlBuilder *@
+        @*                 .addParameter('orderby', $orderByEl.val()); *@
+        @*         }); *@
+        @*     }); *@
+        @* </script> *@
+
+        <script asp-location="Footer">
+
+            $(function() {
+               var orderByEl = 0;
+              $('.sort-products').on('click', function () {
+                    $('.sort-products').removeClass('active');
+                    $(this).addClass('active');
+                    orderByEl= $(this).attr('data-value');
+                    CatalogProducts.getProducts();
+                });
+
+                $(CatalogProducts).on('before', function (e) {
+                    e.payload.urlBuilder
+                      .addParameter('orderby', orderByEl);
+               });
+            });
+        </script>
+    }
+
+    @if (Model.AllowCustomersToSelectPageSize)
+    {
+        <div class="product-page-size">
+            <span>@T("Catalog.PageSize")</span>
+            @Html.DropDownList("products-pagesize", Model.PageSizeOptions, new { aria_label = T("Catalog.PageSize.Label") })
+            <span>@T("Catalog.PageSize.PerPage")</span>
+        </div>
+        <script asp-location="Footer">
+            $(function() {
+                var $pageSizeEl = $('#products-pagesize');
+                $pageSizeEl.on('change', function () {
+                    CatalogProducts.getProducts();
+                });
+
+                $(CatalogProducts).on('before', function (e) {
+                    e.payload.urlBuilder
+                        .addParameter('pagesize', $pageSizeEl.val());
+                });
+            });
+        </script>
+    }
+</div>

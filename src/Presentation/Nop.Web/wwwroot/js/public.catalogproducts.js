@@ -47,7 +47,7 @@
         data: postData,
         success: function (response) {
           $('.products-wrapper').html(response);
-          $('html, body').animate({ scrollTop: $('.center-2 .page').offset().top }, 'slow');
+          $('html, body').animate({ scrollTop: $('.center-1 .page').offset().top }, 'slow');
           $(self).trigger({ type: "loaded" });
         },
         error: function () {

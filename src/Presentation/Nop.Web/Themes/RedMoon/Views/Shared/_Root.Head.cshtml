@@ -1,8 +1,9 @@
 ﻿@using Nop.Core.Domain.Catalog
 @using Nop.Core.Domain.Common
 @using Nop.Core.Domain.Seo
-@using Nop.Services.Security
 @using Nop.Core.Events
+@using Nop.Services.Security
+
 
 @inject CatalogSettings catalogSettings
 @inject CommonSettings commonSettings
@@ -37,7 +38,7 @@
     {
         NopHtml.AppendScriptParts(ResourceLocation.Footer, "~/lib_npm/jquery-migrate/jquery-migrate.min.js");
     }
-    NopHtml.AppendScriptParts(ResourceLocation.Footer, "~/lib_npm/jquery-ui-dist/jquery-ui.min.js");
+    // NopHtml.AppendScriptParts(ResourceLocation.Footer, "~/lib_npm/jquery-ui-dist/jquery-ui.min.js");
     NopHtml.AppendScriptParts(ResourceLocation.Footer, "~/lib_npm/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js");
     NopHtml.AppendScriptParts(ResourceLocation.Footer, "~/lib_npm/jquery-validation/jquery.validate.min.js");
     NopHtml.AppendScriptParts(ResourceLocation.Footer, "~/lib_npm/jquery/jquery.min.js");

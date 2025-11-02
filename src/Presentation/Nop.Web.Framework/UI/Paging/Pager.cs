@@ -421,7 +421,7 @@ public partial class Pager : IHtmlContent
                 for (var i = firstIndividualPageIndex; i <= lastIndividualPageIndex; i++)
                 {
                     if (_model.PageIndex == i)
-                        links.AppendFormat("<li class=\"" + _currentPageCssClass + "\"><span>{0}</span></li>", (i + 1));
+                        links.AppendFormat("<li class=\"" + _currentPageCssClass + "\"><a class=\"page-link\">{0}</a></li>", (i + 1));
                     else
                         links.Append(await CreatePageLinkAsync(i + 1, (i + 1).ToString(), _individualPageCssClass));
                 }
@@ -500,6 +500,7 @@ public partial class Pager : IHtmlContent
             liBuilder.AddCssClass(cssClass);
 
         var aBuilder = new TagBuilder("a");
+        aBuilder.AddCssClass("page-link");
         aBuilder.InnerHtml.AppendHtml(text);
         aBuilder.MergeAttribute("data-page", pageNumber.ToString());
         aBuilder.MergeAttribute("href", CreateDefaultUrl(pageNumber));

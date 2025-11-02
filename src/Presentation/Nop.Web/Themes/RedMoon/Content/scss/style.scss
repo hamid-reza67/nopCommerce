@@ -113,6 +113,12 @@ body {
   }
 }
 
+@media (min-width: 1500px) {
+    .container, .container-lg, .container-md, .container-sm, .container-xl, .container-xxl {
+        max-width: 1536px;
+    }
+}
+
 .breadcrumb {
   margin: 24px 0;
   .breadcrumb-item {

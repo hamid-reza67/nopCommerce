@@ -1,0 +1,57 @@
+﻿@model SpecificationFilterModel
+
+
+<div class="accordion" id="filterAccordion">
+    @{
+        int index = 1;
+    }
+    @foreach (var attr in Model.Attributes)
+    {
+        <div class="accordion-item">
+            <div class="accordion-header">
+                <button class="accordion-button @(index==1 ? "" : "collapsed")" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-@index" aria-expanded="@(index==1 ? true : false)" aria-controls="collapse-@index">@attr.Name</button>
+            </div>
+            <div class="accordion-collapse collapse @(index==1 ? "show" : "")" id="collapse-@index">
+                <div class="accordion-body">
+                    <ul class="list-unstyled">
+                        @foreach (var value in attr.Values)
+                        {
+                            <li>
+                                <div class="form-check">
+                                    <input id="attribute-option-@value.Id" class="form-check-input" type="checkbox" data-option-id="@value.Id" checked="@value.Selected">
+                                    <label class="form-check-label" for="attribute-option-@value.Id">@value.Name</label>
+                                </div>
+                            </li>
+                        }
+                    </ul>
+                </div>
+            </div>
+        </div>
+        index++;
+    }
+</div>
+<script asp-location="Footer">
+    $(function() {
+
+        $('.accordion-button').on('click',function(){
+            $(this).parent().next().toggleClass('show')
+        });
+        var $optionEls = $('[data-option-id]');
+        $optionEls.on('change', function () {
+            CatalogProducts.getProducts();
+        });
+
+        $(CatalogProducts).on('before', function (e) {
+            var selectedOptions = $.map($optionEls, function (el) {
+                var $optionEl = $(el);
+                if ($optionEl.is(':checked')) return $optionEl.data('option-id');
+                return null;
+            });
+
+            if (selectedOptions && selectedOptions.length > 0) {
+                e.payload.urlBuilder
+                    .addParameter('specs', selectedOptions.join(','));
+            }
+        });
+    });
+</script>

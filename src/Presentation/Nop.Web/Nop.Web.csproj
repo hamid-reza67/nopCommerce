@@ -64,6 +64,60 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Content Update="Themes\RedMoon\Views\Catalog\CategoryTemplate.ProductsInGridOrLines.cshtml">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+    </Content>
+    <Content Update="Themes\RedMoon\Views\Catalog\ManufacturerAll.cshtml">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+    </Content>
+    <Content Update="Themes\RedMoon\Views\Catalog\ManufacturerTemplate.ProductsInGridOrLines.cshtml">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+    </Content>
+    <Content Update="Themes\RedMoon\Views\Catalog\NewProducts.cshtml">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+    </Content>
+    <Content Update="Themes\RedMoon\Views\Catalog\ProductsByTag.cshtml">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+    </Content>
+    <Content Update="Themes\RedMoon\Views\Catalog\ProductTagsAll.cshtml">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+    </Content>
+    <Content Update="Themes\RedMoon\Views\Catalog\Search.cshtml">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+    </Content>
+    <Content Update="Themes\RedMoon\Views\Catalog\Vendor.cshtml">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+    </Content>
+    <Content Update="Themes\RedMoon\Views\Catalog\VendorAll.cshtml">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+    </Content>
+    <Content Update="Themes\RedMoon\Views\Catalog\VendorReviews.cshtml">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+    </Content>
+    <Content Update="Themes\RedMoon\Views\Catalog\_CatalogFilters.cshtml">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+    </Content>
+    <Content Update="Themes\RedMoon\Views\Catalog\_CatalogProducts.cshtml">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+    </Content>
+    <Content Update="Themes\RedMoon\Views\Catalog\_CatalogSelectors.cshtml">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+    </Content>
+    <Content Update="Themes\RedMoon\Views\Catalog\_FilterManufacturerBox.cshtml">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+    </Content>
+    <Content Update="Themes\RedMoon\Views\Catalog\_FilterPriceBox.cshtml">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+    </Content>
+    <Content Update="Themes\RedMoon\Views\Catalog\_FilterSpecsBox.cshtml">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+    </Content>
+    <Content Update="Themes\RedMoon\Views\Catalog\_ProductsInGridOrLines.cshtml">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+    </Content>
+    <Content Update="Themes\RedMoon\Views\Catalog\_VendorProductReviews.cshtml">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+    </Content>
     <Content Update="Themes\RedMoon\Views\Product\CompareProducts.cshtml">
       <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
     </Content>
@@ -179,6 +233,9 @@
       <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
     </Content>
     <Content Update="Themes\RedMoon\Views\Shared\_Header.cshtml">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+    </Content>
+    <Content Update="Themes\RedMoon\Views\Shared\_ProductBox.cshtml">
       <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
     </Content>
     <Content Update="Themes\RedMoon\Views\Shared\_ProductReviewHelpfulness.cshtml">

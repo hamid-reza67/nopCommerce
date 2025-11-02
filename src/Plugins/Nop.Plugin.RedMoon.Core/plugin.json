@@ -1,0 +1,11 @@
+{
+  "Group": "RedMoon",
+  "FriendlyName": "RedMoon Core",
+  "SystemName": "RedMoon.Core",
+  "Version": "4.90.1",
+  "SupportedVersions": [ "4.90" ],
+  "Author": "Hamid Reza Shirdel",
+  "DisplayOrder": 1,
+  "FileName": "Nop.Plugin.RedMoon.Core.dll",
+  "Description": "This plugin allows to"
+}

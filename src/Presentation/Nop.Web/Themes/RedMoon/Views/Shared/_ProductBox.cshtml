@@ -1,0 +1,90 @@
+﻿@model ProductOverviewModel
+
+@using Nop.Core
+@using Nop.Core.Domain.Catalog
+@using Nop.Core.Domain.Orders
+@using Nop.Core.Domain.Tax
+
+@inject CatalogSettings catalogSettings
+@inject IWorkContext workContext
+
+@{
+    //prepare "Add to cart" AJAX link
+    var addtocartlink = "";
+    var shoppingCartTypeId = (int)ShoppingCartType.ShoppingCart;
+    var quantity = 1;
+    if (Model.ProductPrice.ForceRedirectionAfterAddingToCart)
+    {
+        addtocartlink = Url.RouteUrl("AddProductToCart-Catalog", new { productId = Model.Id, shoppingCartTypeId = shoppingCartTypeId, quantity = quantity, forceredirection = Model.ProductPrice.ForceRedirectionAfterAddingToCart });
+    }
+    else
+    {
+        addtocartlink = Url.RouteUrl("AddProductToCart-Catalog", new { productId = Model.Id, shoppingCartTypeId = shoppingCartTypeId, quantity = quantity });
+    }
+
+    var addtowishlistlink = Url.RouteUrl("AddProductToCart-Catalog", new { productId = Model.Id, shoppingCartTypeId = (int)ShoppingCartType.Wishlist, quantity = quantity });
+    var addtocomparelink = Url.RouteUrl("AddProductToCompare", new { productId = Model.Id });
+}
+
+
+
+<a class="product-box" href="@(Url.RouteUrl<Product>(new {SeName = Model.SeName }))">
+    <div class="header">
+        <div class="image-wrapper">
+            @if (Model.PictureModels.Count > 1)
+            {
+                <div class="swiper" id="swiper-@Model.Id" dir="@Html.GetUIDirection(!await Html.ShouldUseRtlThemeAsync())">
+                    <div class="swiper-wrapper">
+                        @foreach (var picture in Model.PictureModels)
+                        {
+                            <a class="swiper-slide" href="@(Url.RouteUrl<Product>(new { SeName = Model.SeName }))" title="@picture.Title">
+                                <img alt="@picture.AlternateText" src="@picture.ImageUrl" title="@picture.Title" />
+                            </a>
+                        }
+                    </div>
+                    <!-- Add Pagination -->
+                    <div class="swiper-pagination"></div>
+                </div>
+
+                <script asp-location="Footer">
+                    new Swiper('#swiper-@(Model.Id)', {
+                        pagination: {
+                            clickable: true,
+                            el: '.swiper-pagination',
+                        },
+                    });
+                </script>
+            }
+            else
+            {
+                var picture = Model.PictureModels.FirstOrDefault();
+                <img alt="@picture?.AlternateText" src="@picture?.ImageUrl" title="@picture?.Title" />
+            }
+        </div>
+    </div>
+    <div class="body">
+        <div class="title">@Model.Name</div>
+        @if (catalogSettings.ShowSkuOnCatalogPages && !string.IsNullOrEmpty(Model.Sku))
+        {
+            <div class="sku">
+                @Model.Sku
+            </div>
+        }
+        @if (Model.ReviewOverviewModel.AllowCustomerReviews)
+        {
+            <div class="rate"><span class="icon icon-Vector"></span><span class="text">@Model.ReviewOverviewModel.TotalReviews</span></div>
+        }
+        
+        <div class="price-wrapper">
+            <div class="discount">30%</div>
+            <div class="pricing">
+                <div class="price"><span class="text">@Model.ProductPrice.Price</span><img src="assets/svg/toman.svg" alt="" height="12" /></div>
+                @if (!string.IsNullOrEmpty(Model.ProductPrice.OldPrice))
+                {
+                    <div class="old-price">@Model.ProductPrice.OldPrice</div>
+                }
+            </div>
+        </div>
+    </div>
+</a>
+
